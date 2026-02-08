@@ -6,25 +6,26 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::livewire('/login', 'pages::auth.login')
-    ->middleware(['guest'])->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::livewire('/dashboard', 'pages::dashboard')
+        ->middleware(['verified'])->name('dashboard');
 
-Route::livewire('/forgot-password', 'pages::auth.forgot-password')
-    ->middleware(['guest'])->name('password.request');
+    Route::livewire('/verify-email', 'pages::auth.verify-email')
+        ->middleware(['auth'])->name('verification.notice');
 
-Route::livewire('/confirm-password', 'pages::auth.confirm-password')
-    ->middleware(['auth'])->name('password.confirm');
+    Route::livewire('/confirm-password', 'pages::auth.confirm-password')
+        ->middleware(['auth'])->name('password.confirm');
+});
 
-Route::livewire('/reset-password/{token}', 'pages::auth.reset-password')
-    ->middleware('guest')->name('password.reset');
+Route::middleware(['guest'])->group(function () {
+    Route::livewire('/login', 'pages::auth.login')->name('login');
 
-Route::livewire('/verify-email', 'pages::auth.verify-email')
-    ->middleware(['auth'])->name('verification.notice');
+    Route::livewire('/forgot-password', 'pages::auth.forgot-password')->name('password.request');
 
-Route::livewire('/two-factor-challenge', 'pages::auth.two-factor-challenge')
-    ->middleware(['guest'])->name('two-factor.login');
+    Route::livewire('/reset-password/{token}', 'pages::auth.reset-password')->name('password.reset');
 
-Route::livewire('/dashboard', 'pages::dashboard')
-    ->middleware(['auth', 'verified'])->name('dashboard');
+    Route::livewire('/two-factor-challenge', 'pages::auth.two-factor-challenge')->name('two-factor.login');
+});
 
-require __DIR__.'/settings.php';
+
+require __DIR__ . '/settings.php';
