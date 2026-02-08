@@ -36,8 +36,8 @@ new class extends Component {
            x-transition:enter-end="translate-x-0"
            class="fixed inset-y-0 left-0 w-sidebar bg-surface z-50 lg:hidden shadow-xl">
         <div class="flex flex-col h-full">
-            <div class="flex items-center gap-3 p-3 h-16 shrink-0">
-                <livewire:logo-icon class="!size-8 shrink-0"/>
+            <div class="flex items-center gap-2 p-3 h-16 shrink-0">
+                <livewire:logo-icon class="!size-7 shrink-0"/>
                 <p class="truncate font-bold text-sm uppercase tracking-wider">{{ config('app.name') }}</p>
             </div>
 
@@ -59,8 +59,8 @@ new class extends Component {
            x-transition:leave-end="-translate-x-full"
            class="w-sidebar bg-surface lg:block hidden shrink-0 fixed inset-y-0 left-0 z-30">
         <div class="flex flex-col h-full">
-            <div class="flex items-center gap-3 p-3 h-16 shrink-0">
-                <livewire:logo-icon class="!size-8 shrink-0"/>
+            <div class="flex items-center gap-2 p-3 h-16 shrink-0">
+                <livewire:logo-icon class="!size-7 shrink-0"/>
                 <p class="truncate font-bold text-sm uppercase tracking-wider">{{ config('app.name') }}</p>
             </div>
 
@@ -83,7 +83,7 @@ new class extends Component {
             <livewire:user-desktop-menu/>
         </nav>
 
-        <div class="flex-1 overflow-y-auto"
+        <div class="flex-1 overflow-y-auto lg:p-4 p-2"
              data-scroll-area>
             {{ $slot }}
             <div class="my-16"></div>
